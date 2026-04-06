@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartEra University - Future Ready Education</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+      url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=1920&q=80')
+      center center / cover fixed no-repeat;
+      color: #111;
+    }
+
+    .fade-in { opacity: 0; transform: translateY(40px); animation: fadeUp 1s forwards; }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+    .glass { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.25); }
+
+    /* Program Cards */
+    .program-item {
+      border-left: 6px solid transparent;
+      transition: all 0.4s ease;
+      color: #1e3a8a;
+      font-weight: 600;
+      background: linear-gradient(to right, #eff6ff, #dbeafe);
+      position: relative;
+      overflow: hidden;
+    }
+    .program-item:hover {
+      transform: translateY(-5px) scale(1.03);
+      border-left-color: #2563eb;
+      background: linear-gradient(to right, #93c5fd, #bfdbfe, #e0f2fe);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    /* Chatbot */
+    #chatbot-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }
+    #chat-window {
+      width: 340px; height: 460px;
+      display: none; flex-direction: column;
+      border-radius: 20px; overflow: hidden;
+      background: #fffde7;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: slideUp 0.5s ease;
+    }
+    @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+    .chat-header {
+      background: #facc15;
+      color: #111;
+      padding: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    #chat-messages { flex: 1; overflow-y: auto; padding: 12px; background: #fffef9; }
+    .chat-bubble-ai, .chat-bubble-user {
+      border-radius: 14px;
+      padding: 10px 14px;
+      margin-top: 8px;
+      max-width: 80%;
+    }
+    .chat-bubble-ai { background: #fef3c7; color: #111; align-self: flex-start; }
+    .chat-bubble-user { background: #1e3a8a; color: white; align-self: flex-end; }
+
+    #open-chat {
+      background: #facc15;
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      color: #111;
+      font-size: 28px;
+      font-weight: bold;
+      transition: transform 0.3s;
+    }
+    #open-chat:hover { transform: scale(1.1); }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="bg-blue-900 bg-opacity-90 text-white p-4 flex justify-between items-center sticky top-0 z-50 shadow-xl">
+    <div class="flex items-center space-x-3">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-yellow-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+          d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m0-6L3 9m9 5l9-5M9 21h6" />
+      </svg>
+      <h1 class="text-2xl font-bold tracking-wide">SmartEra University</h1>
+    </div>
+    <nav class="space-x-6 hidden md:block">
+      <a href="#programs" class="hover:text-yellow-400 transition">Programs</a>
+      <a href="#about" class="hover:text-yellow-400 transition">About</a>
+      <a href="#contact" class="hover:text-yellow-400 transition">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="text-white text-center py-28 relative">
+    <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/70 to-transparent"></div>
+    <div class="relative z-10 fade-in">
+      <div class="glass inline-block px-10 py-8 rounded-3xl shadow-2xl">
+        <h2 class="text-5xl font-extrabold mb-4">Innovate Your Future</h2>
+        <p class="max-w-2xl mx-auto mb-6 text-lg text-gray-100">
+          Join SmartEra University where technology meets tradition — empowering innovators and leaders of tomorrow.
+        </p>
+        <a href="#contact" class="bg-yellow-400 text-blue-900 px-6 py-3 font-semibold rounded-full shadow-lg hover:bg-yellow-300 transition">
+          Apply Now
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programs -->
+  <section id="programs" class="py-20 bg-gray-100 fade-in">
+    <h3 class="text-4xl font-bold text-blue-900 text-center mb-10">Our Academic Programs</h3>
+    <ul class="max-w-4xl mx-auto rounded-2xl shadow-2xl overflow-hidden text-lg font-medium">
+      <li class="program-item p-5">B.Tech - Artificial Intelligence & Data Science</li>
+      <li class="program-item p-5">M.Tech - Advanced Computing & Cybersecurity</li>
+      <li class="program-item p-5">BCA - Computer Applications</li>
+      <li class="program-item p-5">MCA - Web & App Development</li>
+      <li class="program-item p-5">BBA - Business Administration</li>
+      <li class="program-item p-5">MBA - Analytics & Management</li>
+      <li class="program-item p-5">B.Sc - Information Technology</li>
+      <li class="program-item p-5">M.Sc - Data Science</li>
+      <li class="program-item p-5">B.Com - Commerce</li>
+      <li class="program-item p-5">M.Com - Finance</li>
+    </ul>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 bg-white bg-opacity-95 fade-in">
+    <h3 class="text-4xl font-bold text-blue-900 text-center mb-10">About SmartEra University</h3>
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center px-6">
+      <div>
+        <p class="text-gray-700 text-lg leading-relaxed">
+          SmartEra University, located in Indore, Madhya Pradesh, is a hub for innovation and advanced education.
+          We focus on practical learning, research, and global exposure to make our students industry-ready.
+        </p>
+        <p class="text-gray-700 text-lg mt-4 leading-relaxed">
+          Email: <b>info@smarterauniversity.edu</b><br>
+          Phone: <b>+91 98765 43210</b>
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+       
+        <img src="https://images.unsplash.com/photo-1596495577886-d920f1fb7238?auto=format&fit=crop&w=600&q=80" 
+             alt="Students Activity" class="rounded-2xl shadow-lg hover:scale-105 transition duration-300">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 fade-in bg-gray-100">
+    <h3 class="text-4xl font-bold text-blue-900 text-center mb-10">Get in Touch</h3>
+    <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-2xl p-8 glass">
+      <form id="contact-us">
+        <div class="mb-5">
+          <label for="name" class="block text-blue-900 font-semibold mb-2">Your Name</label>
+          <input type="text" id="name" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" required>
+        </div>
+        <div class="mb-5">
+          <label for="email" class="block text-blue-900 font-semibold mb-2">Your Email</label>
+          <input type="email" id="email" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none" required>
+        </div>
+        <div class="mb-5">
+          <label for="message" class="block text-blue-900 font-semibold mb-2">Your Message</label>
+          <textarea id="message" class="w-full border border-gray-300 rounded-lg p-3 h-28 focus:ring-2 focus:ring-blue-500 outline-none" required></textarea>
+        </div>
+        <button type="submit" class="bg-blue-900 text-white w-full py-3 rounded-lg font-semibold hover:bg-blue-800 transition">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-blue-900 text-white text-center py-6 bg-opacity-95">
+    <p>© 2025 SmartEra University | Designed by Garima & Bhavna </p>
+  </footer>
+
+  <!-- Chatbot -->
+  <div id="chatbot-container">
+    <div id="chat-window">
+      <div class="chat-header">
+        <strong>Campus AI</strong>
+        <button id="close-chat" class="text-xl">×</button>
+      </div>
+      <div id="chat-messages">
+        <div class="chat-bubble-ai">Hello! I’m Campus AI. How can I help you with SmartEra University?</div>
+      </div>
+      <form id="chat-form" style="display:flex;border-top:1px solid #ddd;">
+        <input id="chat-input" placeholder="Type your question..." style="flex:1;padding:10px;border:none;outline:none;" />
+        <button type="submit" style="background:#facc15;color:#111;border:none;padding:0 15px;cursor:pointer;font-weight:600;">Send</button>
+      </form>
+    </div>
+    <button id="open-chat">💬</button>
+  </div>
+
+  <!-- Chatbot + Contact Form JS -->
+  <script>
+    // Chatbot
+    const openChat = document.getElementById('open-chat');
+    const closeChat = document.getElementById('close-chat');
+    const chatWindow = document.getElementById('chat-window');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+
+    openChat.onclick = () => { chatWindow.style.display = 'flex'; openChat.style.display = 'none'; };
+    closeChat.onclick = () => { chatWindow.style.display = 'none'; openChat.style.display = 'flex'; };
+
+    chatForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const text = chatInput.value.trim();
+      if (!text) return;
+      const userDiv = document.createElement('div');
+      userDiv.className = 'chat-bubble-user';
+      userDiv.textContent = text;
+      chatMessages.appendChild(userDiv);
+      chatInput.value = '';
+      const aiDiv = document.createElement('div');
+      aiDiv.className = 'chat-bubble-ai';
+      aiDiv.textContent = "Typing...";
+      chatMessages.appendChild(aiDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      try {
+        const res = await fetch("http://127.0.0.1:5000/api/campus-ai", {   // Correct route
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: text })
+        });
+        const data = await res.json();
+        aiDiv.textContent = data.answer || "Sorry, I didn't get that.";
+      } catch {
+        aiDiv.textContent = " Please run your Flask backend (app.py).";
+      }
+    };
+
+    // Contact Form
+    document.getElementById("contact-us").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const message = document.getElementById("message").value.trim();
+
+      if (!name || !email || !message) {
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      try {
+        const res = await fetch("http://127.0.0.1:5000/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message })
+        });
+        const data = await res.json();
+        alert(data.message);
+        document.getElementById("contact-us").reset();
+      } catch (err) {
+        alert(" Unable to connect to backend. Make sure Flask is running.");
+      }
+    });
+  </script>
+</body>
+</html>
